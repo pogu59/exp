@@ -15,6 +15,8 @@ public class Vending__Machine {
     }
 
     public void start() {
+        boolean running = true;
+
         System.out.println("돈을 입력해주세요.");
         int insert = sc.nextInt();
         // 1원을 관리자 선택창으로 만듦
@@ -25,6 +27,7 @@ public class Vending__Machine {
             while(true){
                 menu();
             }
+            //반복문을 메뉴 고르고 구매가 완료 됐을 때만 종류하게끔
         }
     }
     public void menu(){
@@ -33,33 +36,33 @@ public class Vending__Machine {
         int menuChoice = sc.nextInt();
         System.out.println("수량을 입력해주세요.");
         int ea = sc.nextInt();
-
+//구매물품이랑 구매수량을 확인 했을 때 잔돈이 음수가 되면 구매 실패하게
         switch (menuChoice){
             case 1:
-                checkOut(coca_cola, ea);
+                stockCheck(coca_cola, ea);
                 break;
             case 2:
-                checkOut(pepsi, ea);
+                stockCheck(pepsi, ea);
                 break;
             case 3:
-                checkOut(red_bull, ea);
+                stockCheck(red_bull, ea);
                 break;
             case 4:
-                checkOut(sprite, ea);
+                stockCheck(sprite, ea);
                 break;
         }
-
     }
-    public void checkOut(Queue<Integer> Queue, int Ea){
-        if (Ea > Queue.size()){
-            System.out.println("재고가 부족합니다");
+
+    public void stockCheck(Queue<Integer> queue, int Ea){
+        if (Ea > queue.size()){
+            System.out.println("재고가 부족합니다.");
         }else if(insertCoin < 0) {
-            //잔액 검사
             System.out.println("잔액이 부족합니다.");
-        }else if(Ea < Queue.size() && insertCoin >= 0){
+        }else if(Ea < queue.size() && insertCoin >= 0){
             System.out.println("이용해 주셔서 감사합니다.");
         }
     }
+    //구매 후 자판기 잔돈처럼 1000원이 나올때 천원짜리 지폐한장, 700원 나오면 500원, 100원*2개 이렇게 나오게
 
     //재고 수량 확인과 입고 등 관리를 위한 코드
     public void admin() {
@@ -78,19 +81,15 @@ public class Vending__Machine {
                 switch (addstock) {
                     case 1:
                         addDrink(coca_cola, ea);
-                        System.out.println("코카콜라 입고 후 수량" + coca_cola.size() + "개");
                         break;
                     case 2:
                         addDrink(pepsi, ea);
-                        System.out.println("펩시 입고 후 수량" + pepsi.size() + "개");
                         break;
                     case 3:
                         addDrink(red_bull, ea);
-                        System.out.println("레드불 입고 후 수량" + red_bull.size() + "개");
                         break;
                     case 4:
                         addDrink(sprite, ea);
-                        System.out.println("스프라이트 입고 후 수량" + sprite.size() + "개");
                         break;
                 }
             case 3:
@@ -104,6 +103,7 @@ public class Vending__Machine {
         for (int i = 1; i <= stock; i++) {
             queue.offer(i);
         }
+        System.out.println(queue + "입고 후 수량 " + queue.size() + "개");
     }
 
  }
