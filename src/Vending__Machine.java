@@ -14,6 +14,7 @@ public class Vending__Machine {
     Queue<Integer> pepsi = new ArrayDeque<>();
     Queue<Integer> red_bull = new ArrayDeque<>();
     Queue<Integer> sprite = new ArrayDeque<>();
+    boolean flag = true;
     int insertCoin = 0;
 
     //프로그램 시작과 동시 자판기 시작
@@ -21,6 +22,7 @@ public class Vending__Machine {
         Vending__Machine machine = new Vending__Machine();
         machine.start();//로프를 어디로 걸어야 될지 다시 고민
     }
+
 
     public void start() {
         System.out.println("돈을 입력해주세요.");
@@ -30,7 +32,8 @@ public class Vending__Machine {
             admin();
         } else if (insert >= 500) {
             insertCoin += insert;
-            while(true){
+
+            while(flag){
                 menu();
             }
             //반복문을 메뉴 고르고 구매가 완료 됐을 때만 종류하게끔
@@ -38,7 +41,7 @@ public class Vending__Machine {
     }
     public void menu(){
         System.out.println("메뉴를 선택해주세요");
-        System.out.println("1.코카 콜라[2100원] 2. 펩시[2000원] 3. 레드불[2200원] 4. 스프라이트[1900원]"); //메뉴 선택
+        System.out.println("1.코카 콜라[2100원] 2. 펩시[2000원] 3. 레드불[2200원] 4. 스프라이트[1900원] 5. 종료"); //메뉴 선택
         int menuChoice = sc.nextInt();
 //구매물품이랑 구매수량을 확인 했을 때 잔돈이 음수가 되면 구매 실패하게
         switch (menuChoice){
@@ -54,6 +57,10 @@ public class Vending__Machine {
             case 4:
                 stockCheck(sprite);
                 break;
+            case 5:
+                System.out.println("종료합니다.");
+                flag = false;
+
         }
     }
 
