@@ -1,4 +1,12 @@
 import java.util.*;
+class Drink{
+    String name;
+    int price;
+    public Drink(String name, int price){
+        this.name = name;
+        this.price = price;
+    }
+}
 
 public class Vending__Machine {
     Scanner sc = new Scanner(System.in);
@@ -11,12 +19,10 @@ public class Vending__Machine {
     //프로그램 시작과 동시 자판기 시작
     public static void main(String[] args) {
         Vending__Machine machine = new Vending__Machine();
-            machine.start();//로프를 어디로 걸어야 될지 다시 고민
+        machine.start();//로프를 어디로 걸어야 될지 다시 고민
     }
 
     public void start() {
-        boolean running = true;
-
         System.out.println("돈을 입력해주세요.");
         int insert = sc.nextInt();
         // 1원을 관리자 선택창으로 만듦
@@ -34,35 +40,36 @@ public class Vending__Machine {
         System.out.println("메뉴를 선택해주세요");
         System.out.println("1.코카 콜라[2100원] 2. 펩시[2000원] 3. 레드불[2200원] 4. 스프라이트[1900원]"); //메뉴 선택
         int menuChoice = sc.nextInt();
-        System.out.println("수량을 입력해주세요.");
-        int ea = sc.nextInt();
 //구매물품이랑 구매수량을 확인 했을 때 잔돈이 음수가 되면 구매 실패하게
         switch (menuChoice){
             case 1:
-                stockCheck(coca_cola, ea);
+                stockCheck(coca_cola);
                 break;
             case 2:
-                stockCheck(pepsi, ea);
+                stockCheck(pepsi);
                 break;
             case 3:
-                stockCheck(red_bull, ea);
+                stockCheck(red_bull);
                 break;
             case 4:
-                stockCheck(sprite, ea);
+                stockCheck(sprite);
                 break;
         }
     }
 
-    public void stockCheck(Queue<Integer> queue, int Ea){
-        if (Ea > queue.size()){
+    public void stockCheck(Queue<Integer> queue){
+        if (queue.isEmpty()){
             System.out.println("재고가 부족합니다.");
         }else if(insertCoin < 0) {
             System.out.println("잔액이 부족합니다.");
-        }else if(Ea < queue.size() && insertCoin >= 0){
+        }else if(1 < queue.size()){
+            queue.poll();
             System.out.println("이용해 주셔서 감사합니다.");
         }
     }
     //구매 후 자판기 잔돈처럼 1000원이 나올때 천원짜리 지폐한장, 700원 나오면 500원, 100원*2개 이렇게 나오게
+
+
 
     //재고 수량 확인과 입고 등 관리를 위한 코드
     public void admin() {
